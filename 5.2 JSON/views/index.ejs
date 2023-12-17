@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Taco Recipes</title>
+    <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+  </head>
+
+  <body>
+    <h1>Taco Town 🌮</h1>
+
+    <form action="/recipe" method="POST" class="buttons">
+      <button type="submit" value="chicken" name="choice">🍗</button>
+      <button type="submit" value="beef" name="choice">🥩</button>
+      <button type="submit" value="fish" name="choice">🐟</button>
+    </form>
+    <div id="recipeContainer" class="hidden">
+      <!-- If no recipe yet, show: -->
+      <% if (!locals.p_data) { %>
+      <h2>Pick your favourite taco ingredient 👆</h2>
+      <% } else {%>
+      <h2><%= p_data.name %> 👆</h2>
+      <!-- Else, show the recipe name e.g. <h2>Recipe name</h2>-->
+
+      <h3>Ingredients:</h3>
+      <ul id="ingredientsList">
+        <li>
+          <%= p_data.ingredients.protein.name %>, <%=
+          p_data.ingredients.protein.preparation %>
+        </li>
+        <li><%= p_data.ingredients.salsa.name %></li>
+        <% for( let index = 0; index < p_data.ingredients.toppings.length;
+        index++ ) { %>
+        <li>
+          <%= p_data.ingredients.toppings[index].quantity %> of <%=
+          p_data.ingredients.toppings[index].name %>
+        </li>
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+  </body>
+</html>
